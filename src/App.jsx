@@ -1,73 +1,85 @@
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-import { useState } from "react";
-import { supabase } from "./lib/supabase";
+import {
+  AuthProvider,
+  useAuth,
+} from "./contexts/AuthContext";
 
-function App() {
-  const [estado, setEstado] = useState("sin_probar");
-  const [mensaje, setMensaje] = useState("");
+import Auth from "./pages/Auth";
+import Bienvenida from "./pages/Bienvenida";
+import RutaPrivada from "./components/RutaPrivada";
 
-  async function probarConexion() {
-    setEstado("probando");
-    setMensaje("");
+// Controla el acceso a la pantalla de login.
+function RutaAcceso() {
+  const { usuario, cargandoSesion } = useAuth();
 
-    try {
-      // Consultamos la sesión actual para comprobar
-      // que el cliente puede comunicarse con Supabase.
-      const { error } = await supabase.auth.getSession();
+  // Esperar mientras se comprueba la sesión.
+  if (cargandoSesion) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-fondo p-4">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-4 border-slate-200 border-t-accion" />
 
-      if (error) {
-        throw error;
-      }
-
-      setEstado("correcto");
-      setMensaje(
-        "El cliente de Supabase respondió correctamente."
-      );
-    } catch (error) {
-      setEstado("error");
-      setMensaje(error.message);
-    }
+          <p className="font-medium text-principal">
+            Cargando Cotizafácil...
+          </p>
+        </div>
+      </main>
+    );
   }
 
+  // Si ya inició sesión, enviar al dashboard.
+  if (usuario) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  // Si no tiene sesión, mostrar el formulario.
+  return <Auth />;
+}
+
+// Rutas de la aplicación.
+function RutasApp() {
   return (
-    <main className="min-h-screen bg-fondo flex items-center justify-center p-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
-        <h1 className="text-3xl font-bold text-principal">
-          Cotizafácil
-        </h1>
+    <Routes>
+      {/* Pantalla pública */}
+      <Route path="/login" element={<RutaAcceso />} />
 
-        <p className="mt-2 text-texto">
-          Paso 0.9 — Conexión con Supabase
-        </p>
+      {/* Pantallas privadas */}
+      <Route element={<RutaPrivada />}>
+        <Route
+          path="/dashboard"
+          element={<Bienvenida />}
+        />
+      </Route>
 
-        <button
-          onClick={probarConexion}
-          disabled={estado === "probando"}
-          className="mt-6 w-full rounded-xl bg-accion px-5 py-3 font-semibold text-white disabled:opacity-60"
-        >
-          {estado === "probando"
-            ? "Comprobando..."
-            : "Probar conexión"}
-        </button>
+      {/* Dirección principal */}
+      <Route
+        path="/"
+        element={<Navigate to="/dashboard" replace />}
+      />
 
-        {mensaje && (
-          <div
-            role="status"
-            className={`mt-5 rounded-lg p-4 text-sm ${
-              estado === "correcto"
-                ? "bg-green-50 text-green-800"
-                : "bg-red-50 text-red-800"
-            }`}
-          >
-            {mensaje}
-          </div>
-        )}
+      {/* Direcciones inexistentes */}
+      <Route
+        path="*"
+        element={<Navigate to="/dashboard" replace />}
+      />
+    </Routes>
+  );
+}
 
-        <p className="mt-6 text-center text-xs text-slate-500">
-          Bloque 0 — Configuración inicial
-        </p>
-      </div>
-    </main>
+// Componente principal.
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <RutasApp />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

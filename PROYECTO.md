@@ -1,255 +1,317 @@
-# Cotizafácil — Documentación del proyecto
 
-**Versión:** 0.1.0  
-**Última actualización:** 2026-10-11  
-**Estado:** En desarrollo — Bloque 0  
-**Metodología:** Desarrollo guiado por bloques  
-**Repositorio GitHub:** Pendiente  
-**URL de producción:** Pendiente
-
----
+# Cotizafácil
 
 ## 1. Descripción del proyecto
 
-Cotizafácil es una aplicación web mobile-first para crear cotizaciones y proformas profesionales en PDF.
-
-Está dirigida a técnicos, electricistas, plomeros, carpinteros, pintores y trabajadores independientes de Latinoamérica.
-
-### Problema
-
-Muchos trabajadores elaboran cotizaciones utilizando papel, notas del celular o mensajes de WhatsApp, sin un formato profesional ni un historial organizado.
-
-### Solución
-
-Permitir que un trabajador cree, descargue y comparta una cotización profesional en menos de dos minutos.
-
-### Acción principal
-
-**Crear una cotización y compartirla con el cliente.**
-
-### Objetivos
-
-- Interfaz sencilla y completamente en español.
-- Diseño optimizado para teléfonos celulares.
-- Generación de cotizaciones en PDF.
-- Compartir cotizaciones mediante WhatsApp.
-- Guardar clientes y precios frecuentes.
-- Mantener los datos privados de cada usuario.
-
-### Fuera del alcance inicial
-
-- Facturación electrónica oficial.
-- Procesamiento de pagos.
-- Inventario avanzado.
-- Contabilidad completa.
-
----
-
-## 2. Arquitectura
-
-Frontend: React + Vite + Tailwind CSS.
-
-Backend: Supabase.
-
-Base de datos: PostgreSQL.
-
-Autenticación: Supabase Auth.
-
-Seguridad: Row Level Security (RLS).
-
-Almacenamiento: Supabase Storage.
-
-Generación de PDF: Librería de generación en el navegador, pendiente de selección definitiva.
-
-Hosting: Vercel.
-
-Control de versiones: Git + GitHub.
-
----
-
-## 3. Stack tecnológico
-
-| Tecnología | Uso | Estado |
-|---|---|---|
-| React | Interfaz de usuario | Instalado |
-| Vite | Entorno de desarrollo | Instalado |
-| Tailwind CSS 3 | Estilos | Configurado |
-| React Router | Navegación | Instalado |
-| Lucide React | Iconografía | Instalado |
-| Supabase JS | Cliente del backend | Instalado |
-| PostgreSQL | Base de datos | Pendiente |
-| GitHub | Control de versiones remoto | Pendiente |
-| Vercel | Publicación | Pendiente |
-| PWA | Instalación móvil | Pendiente |
-
-Las versiones exactas de las dependencias se mantienen en `package.json`.
-
----
-
-## 4. Modelo de datos previsto
-
-El modelo inicial contiene cinco tablas:
-
-1. `negocios`: configuración del negocio y propietario.
-2. `clientes`: información de los clientes.
-3. `items_frecuentes`: materiales y servicios reutilizables.
-4. `cotizaciones`: encabezado, importes y estado.
-5. `cotizacion_items`: líneas de cada cotización.
-
-### Seguridad
-
-Cada usuario podrá consultar y modificar únicamente la información de su negocio.
-
-Se implementarán políticas RLS en todas las tablas.
-
-Los límites comerciales y las operaciones sensibles deberán validarse en el backend.
-
-**Estado:** Modelo propuesto, todavía no implementado.
-
----
-
-## 5. Estructura de carpetas
-
-```text
-cotizafacil/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── contexts/
-│   ├── hooks/
-│   ├── lib/
-│   ├── pages/
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── index.html
-├── package.json
-├── tailwind.config.js
-├── postcss.config.js
-├── vite.config.js
-└── PROYECTO.md
-```
-
----
-
-## 6. Reglas de desarrollo
-
-1. Trabajar mediante bloques pequeños.
-2. Explicar cada paso antes de implementarlo.
-3. No avanzar sin verificar el funcionamiento del paso anterior.
-4. Mantener comentarios útiles en español.
-5. Separar interfaz, lógica y acceso a datos.
-6. Diseñar primero para dispositivos móviles.
-7. Priorizar la simplicidad para usuarios no técnicos.
-8. Documentar errores y decisiones importantes.
-9. Proteger la información de los usuarios.
-10. Realizar commits al completar bloques funcionales.
-
----
-
-## 7. Roadmap
-
-### Bloque 0 — Preparación
-
-- [x] 0.1 Verificar Node.js, npm y Git.
-- [x] 0.2 Crear proyecto React + Vite.
-- [x] 0.3 Configurar Tailwind CSS.
-- [x] 0.4 Instalar librerías principales.
-- [x] 0.5 Crear estructura de carpetas.
-- [ ] 0.6 Crear y verificar PROYECTO.md.
-- [ ] Configurar Git y GitHub.
-- [ ] Crear proyecto Supabase.
-
-### Bloque A — Autenticación
-
-- [ ] Registro de usuarios.
-- [ ] Inicio de sesión.
-- [ ] Cierre de sesión.
-- [ ] Persistencia de sesión.
-- [ ] Protección de rutas.
-
-### Bloque B — Base de datos
-
-- [ ] Crear tablas.
-- [ ] Crear relaciones e índices.
-- [ ] Configurar RLS.
-- [ ] Configurar almacenamiento de logos.
-
-### Bloque C — Onboarding
-
-- [ ] Datos del negocio.
-- [ ] Logo y color.
-- [ ] Moneda, IVA y condiciones.
-
-### Bloque D — Cotizaciones
-
-- [ ] Seleccionar o crear cliente.
-- [ ] Agregar materiales y mano de obra.
-- [ ] Calcular totales.
-- [ ] Guardar borrador.
-
-### Bloque E — PDF y WhatsApp
-
-- [ ] Generar PDF A4.
-- [ ] Mostrar vista previa.
-- [ ] Descargar PDF.
-- [ ] Compartir por WhatsApp.
-
-### Bloques posteriores
-
-- [ ] Historial.
-- [ ] Gestión de clientes.
-- [ ] Precios frecuentes.
-- [ ] Planes Gratis y Pro.
-- [ ] Estadísticas.
-- [ ] PWA y despliegue.
-
----
-
-## 8. Ejecución local
-
-Abrir PowerShell dentro de la carpeta del proyecto.
-
-Ejecutar:
-
-```powershell
-npm install
-npm run dev
-```
-
-Abrir la dirección local indicada por Vite, normalmente:
-
-http://localhost:5173/
-
----
-
-## 9. Registro de errores
-
-Sin errores pendientes reportados hasta el paso 0.5.
-
-Registrar aquí los errores encontrados, su causa y la solución aplicada.
-
----
-
-## 10. Registro de decisiones
-
-**D001:** Utilizar React, Vite y Tailwind CSS 3.
-
-**D002:** Utilizar Supabase como backend.
-
-**D003:** Desarrollar primero la funcionalidad principal de cotización y PDF.
-
-**D004:** Mantener el desarrollo guiado con validación por pasos.
-
-**D005:** Permitir cinco tablas en Cotizafácil porque el modelo requiere más entidades que una mini app básica.
-
-**D006:** Priorizar una interfaz mobile-first con azul oscuro y naranja.
-
----
+Cotizafácil es una aplicación web progresiva (PWA)
+orientada a trabajadores independientes y pequeños
+negocios de Latinoamérica.
+
+Su objetivo es permitir crear cotizaciones y proformas
+profesionales de forma rápida, generar documentos PDF
+y compartirlos con clientes mediante WhatsApp.
+
+La aplicación debe ser fácil de utilizar desde
+un teléfono móvil, incluso para personas con
+poca experiencia tecnológica.
+
+## 2. Público objetivo
+
+- Electricistas
+- Plomeros
+- Técnicos de mantenimiento
+- Instaladores
+- Albañiles
+- Carpinteros
+- Pintores
+- Trabajadores independientes
+- Pequeños negocios de servicios
+
+## 3. Tecnologías
+
+Frontend:
+- React
+- Vite
+- JavaScript
+- Tailwind CSS 3
+- React Router
+- Lucide React
+
+Backend y autenticación:
+- Supabase
+- Supabase Auth
+- PostgreSQL
+- Row Level Security (RLS)
+
+Despliegue:
+- GitHub
+- Vercel
+
+Objetivo adicional:
+- Convertir la aplicación en PWA instalable.
+
+## 4. Identidad visual
+
+Color principal: #17324D
+Color de acción: #F97316
+Color de fondo: #F8FAFC
+Color de texto: #1E293B
+
+Diseño:
+- Mobile-first
+- Interfaz limpia
+- Botones grandes
+- Formularios sencillos
+- Navegación intuitiva
+- Adaptación a pantallas de 375 px
+
+## 5. Funcionalidades previstas
+
+### Autenticación
+- Registro de usuarios
+- Inicio de sesión
+- Confirmación de correo
+- Persistencia de sesión
+- Cierre de sesión
+- Protección de rutas
+
+### Configuración del negocio
+- Nombre comercial
+- Información de contacto
+- Dirección
+- Logotipo
+- Color del PDF
+- Moneda
+- IVA
+- Vigencia de cotizaciones
+- Términos y condiciones
+
+### Clientes
+- Registrar clientes
+- Editar clientes
+- Consultar clientes
+- Seleccionar clientes en cotizaciones
+
+### Catálogo de precios
+- Registrar productos o servicios frecuentes
+- Definir precios
+- Reutilizar conceptos en cotizaciones
+
+### Cotizaciones
+- Crear cotizaciones
+- Agregar materiales y mano de obra
+- Calcular subtotales
+- Aplicar descuentos
+- Calcular IVA
+- Generar PDF
+- Compartir mediante WhatsApp
+- Consultar historial
+- Editar o duplicar cotizaciones
+
+### Planes
+
+Plan gratuito:
+- Hasta 5 cotizaciones por mes
+- Hasta 15 conceptos frecuentes
+- PDF con marca Cotizafácil
+
+Plan Pro:
+- Cotizaciones ilimitadas
+- Catálogo ampliado
+- Estadísticas
+- Duplicación de cotizaciones
+- Personalización adicional
+
+La integración de pagos se definirá posteriormente.
+
+## 6. Base de datos prevista
+
+Tablas principales:
+
+1. negocios
+2. clientes
+3. items_frecuentes
+4. cotizaciones
+5. cotizacion_items
+
+La estructura definitiva se implementará
+en el Bloque B.
+
+Cada usuario deberá acceder únicamente
+a sus propios datos mediante políticas RLS.
+
+## 7. Estructura del proyecto
+
+src/
+  components/
+    RutaPrivada.jsx
+  contexts/
+    AuthContext.jsx
+  hooks/
+  lib/
+    supabase.js
+  pages/
+    Auth.jsx
+    Bienvenida.jsx
+  App.jsx
+  index.css
+
+Archivos adicionales:
+- .env.local
+- .gitignore
+- package.json
+- tailwind.config.js
+- PROYECTO.md
+
+## 8. Avance del desarrollo
+
+### BLOQUE 0 — Preparación
+
+Estado: COMPLETADO
+
+- Proyecto creado con Vite y React
+- Tailwind CSS 3 configurado
+- React Router instalado
+- Lucide React instalado
+- Supabase JS instalado
+- Estructura de carpetas creada
+- Repositorio Git inicializado
+- Repositorio privado de GitHub conectado
+- Proyecto Supabase creado
+- Variables de entorno configuradas
+- Conexión inicial con Supabase verificada
+
+### BLOQUE A — Autenticación
+
+Estado: COMPLETADO
+
+A.1 Pantalla de autenticación
+- Formulario responsive
+- Diseño de Cotizafácil
+- Alternancia entre registro e inicio de sesión
+
+A.2 Registro
+- Registro conectado a Supabase Auth
+- Mensajes de resultado
+- Manejo de errores
+- Estado de carga
+
+A.3 Inicio de sesión
+- Acceso con correo y contraseña
+- Validación de credenciales
+- Manejo de errores
+
+A.4 Gestión de sesión
+- AuthContext
+- Recuperación de sesión
+- Detección de cambios de autenticación
+- Pantalla temporal de bienvenida
+- Cierre de sesión
+
+A.5 Rutas privadas
+- React Router configurado
+- Ruta pública /login
+- Ruta privada /dashboard
+- Redirecciones automáticas
+- Persistencia de acceso al actualizar
+
+Pruebas realizadas:
+- Registro correcto
+- Inicio de sesión correcto
+- Persistencia al actualizar
+- Cierre de sesión correcto
+- Protección de rutas correcta
+
+### BLOQUE B — Base de datos y seguridad
+
+Estado: PENDIENTE
+
+Objetivos:
+- Crear las tablas principales
+- Establecer relaciones
+- Configurar claves foráneas
+- Activar Row Level Security
+- Crear políticas de acceso por usuario
+- Verificar aislamiento de datos
+
+### BLOQUE C — Configuración inicial del negocio
+
+Estado: PENDIENTE
+
+Objetivos:
+- Onboarding en 3 pasos
+- Datos del negocio
+- Logotipo y color
+- Configuración de moneda e IVA
+- Vigencia y términos
+
+### BLOQUE D — Funcionalidades principales
+
+Estado: PENDIENTE
+
+Objetivos:
+- Dashboard
+- Clientes
+- Catálogo de precios
+- Creación de cotizaciones
+- Historial
+- Cálculos
+
+### BLOQUE E — Documentos y WhatsApp
+
+Estado: PENDIENTE
+
+Objetivos:
+- Generación de PDF
+- Vista previa
+- Descarga
+- Compartir mediante WhatsApp
+
+### BLOQUE F — Planes y publicación
+
+Estado: PENDIENTE
+
+Objetivos:
+- Límites del plan gratuito
+- Funciones Pro
+- Optimización móvil
+- PWA
+- Despliegue en Vercel
+
+## 9. Decisiones técnicas
+
+- Desarrollo incremental por bloques.
+- Cada paso debe probarse antes de avanzar.
+- Se utilizará React con JavaScript.
+- Se mantendrá Tailwind CSS 3.
+- Supabase gestionará la autenticación y los datos.
+- Las rutas privadas protegen la navegación.
+- Las políticas RLS protegerán los datos.
+- No se incluirán claves secretas en el repositorio.
+- El diseño priorizará dispositivos móviles.
+- Se conservará el historial del proyecto en GitHub.
+
+## 10. Metodología de trabajo
+
+Las instrucciones deben incluir:
+
+1. Ruta exacta del archivo.
+2. Indicación de crear o reemplazar.
+3. Código completo cuando se modifique un archivo.
+4. Comandos exactos para PowerShell.
+5. Pruebas claras.
+6. Confirmación antes del siguiente paso.
+
+No avanzar si existen errores pendientes.
 
 ## 11. Próximo paso
 
-Completar y verificar la documentación inicial.
+Comenzar el Bloque B.
 
-Después, continuar con la configuración de Git y GitHub.
+Primera actividad:
+Diseñar y crear la estructura inicial de
+la base de datos en Supabase.
+
+Antes de desarrollar nuevas pantallas,
+se deberán configurar las relaciones
+y las políticas de seguridad RLS.

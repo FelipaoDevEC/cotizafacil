@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Auth from "./pages/Auth";
 import Bienvenida from "./pages/Bienvenida";
@@ -8,6 +8,7 @@ import CatalogoPrecios from "./pages/CatalogoPrecios";
 import NuevaCotizacion from "./pages/NuevaCotizacion";
 import HistorialCotizaciones from "./pages/HistorialCotizaciones";
 import RutaPrivada from "./components/RutaPrivada";
+import NavegacionMovil from "./components/NavegacionMovil";
 
 function PantallaCarga() {
   return (
@@ -28,7 +29,11 @@ function RutaAcceso() {
 }
 
 function RutasApp() {
+  const { usuario } = useAuth();
+  const { pathname } = useLocation();
+  const mostrarMenu = Boolean(usuario) && pathname !== "/login";
   return (
+    <>
     <Routes>
       <Route path="/login" element={<RutaAcceso />} />
       <Route element={<RutaPrivada />}>
@@ -43,6 +48,8 @@ function RutasApp() {
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
+    {mostrarMenu && <><div className="h-20 md:hidden" aria-hidden="true" /><NavegacionMovil /></>}
+    </>
   );
 }
 
